@@ -29,3 +29,30 @@ O sistema permite cadastrar medicamentos, listar itens cadastrados, marcar doses
 ## Como executar
 ```bash
 python -m app.main
+
+## Entrega Intermediária
+
+Nesta etapa do projeto foi implementada integração com API pública.
+
+### API utilizada
+ViaCEP
+
+### Funcionalidades adicionadas
+
+- Consulta de endereço por CEP
+- Retorno automático de rua, bairro, cidade e estado
+- Teste automatizado com pytest
+
+### Como executar
+
+Instalar dependências:
+
+pip install -r requirements.txt
+
+Executar aplicação:
+
+python app/main.py
+
+Executar testes:
+
+pytest
