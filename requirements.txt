@@ -3,3 +3,4 @@ ruff
 supabase
 python-dotenv
 requests
+streamlit
