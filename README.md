@@ -123,3 +123,5 @@ Sempre que alterações são enviadas para o repositório.
 Nicolas David Lopes Monteiro
 
 Projeto desenvolvido como atividade final do Bootcamp.
+
+Atualizado para entrega final do bootcamp.
