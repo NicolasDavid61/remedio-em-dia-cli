@@ -21,5 +21,5 @@ def buscar_cep(cep):
 
         return "Erro na API."
 
-    except:
+    except Exception:
         return "Erro na requisição."
