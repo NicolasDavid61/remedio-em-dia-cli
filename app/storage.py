@@ -1,18 +1,26 @@
-import json
+from supabase import create_client
+from dotenv import load_dotenv
 import os
 
-CAMINHO_ARQUIVO = "data/medicamentos.json"
+load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
 
 def carregar_dados():
-    if not os.path.exists(CAMINHO_ARQUIVO):
-        return []
+    resposta = supabase.table("medicamentos").select("*").execute()
+    return resposta.data
 
-    with open(CAMINHO_ARQUIVO, "r", encoding="utf-8") as arquivo:
-        try:
-            return json.load(arquivo)
-        except json.JSONDecodeError:
-            return []
 
-def salvar_dados(dados):
-    with open(CAMINHO_ARQUIVO, "w", encoding="utf-8") as arquivo:
-        json.dump(dados, arquivo, indent=4, ensure_ascii=False)
+def inserir_medicamento(medicamento):
+    supabase.table("medicamentos").insert(medicamento).execute()
+
+
+def atualizar_medicamento(nome):
+    supabase.table("medicamentos")\
+        .update({"tomado": True})\
+        .eq("nome", nome)\
+        .execute()

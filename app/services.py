@@ -1,5 +1,9 @@
 from app.models import Medicamento
-from app.storage import carregar_dados, salvar_dados
+from app.storage import (
+    carregar_dados,
+    inserir_medicamento,
+    atualizar_medicamento
+)
 
 def validar_horario(horario):
     try:
@@ -17,10 +21,8 @@ def cadastrar_medicamento(nome, dose, horario, dias):
         print("Horário inválido.")
         return
 
-    dados = carregar_dados()
     medicamento = Medicamento(nome, dose, horario, dias)
-    dados.append(medicamento.to_dict())
-    salvar_dados(dados)
+    inserir_medicamento(medicamento.to_dict())
     print("Medicamento cadastrado com sucesso.")
 
 def listar_medicamentos():
@@ -35,16 +37,8 @@ def listar_medicamentos():
         print(f'Nome: {med["nome"]} | Dose: {med["dose"]} | Horário: {med["horario"]} | Dias: {med["dias"]} | Status: {status}')
 
 def marcar_como_tomado(nome):
-    dados = carregar_dados()
-
-    for med in dados:
-        if med["nome"].lower() == nome.lower():
-            med["tomado"] = True
-            salvar_dados(dados)
-            print("Medicamento marcado como tomado.")
-            return
-
-    print("Medicamento não encontrado.")
+    atualizar_medicamento(nome)
+    print("Medicamento marcado como tomado.")
 
 def ver_pendentes():
     dados = carregar_dados()
